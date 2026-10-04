@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 
 
@@ -13,3 +14,6 @@ print(df.shape) # (50000, 2)
 print(df['review'].str.lower())
 
 # 2 -- remove html tags --- 
+
+def remove_html_tags(text):
+    pattern = compile()
