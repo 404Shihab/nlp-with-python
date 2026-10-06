@@ -68,3 +68,78 @@ Thank you!
 # 4 ---- remove punctuation ----
 
 
+import string, time
+
+# Get all punctuation characters from the string module
+exclude = string.punctuation
+
+
+def remove_punc(text):
+    for char in exclude:
+        text = text.replace(char, '')
+    return text
+
+
+
+text = """
+Shihab. Uddin. Bhuiyan!! hi, how are you?
+Hello! World! Bye, Mars
+"""
+
+
+# Record the starting time
+start = time.time()
+
+# Remove punctuation and print the cleaned text
+print(remove_punc(text))
+
+# Calculate the execution time
+time1 = time.time() - start
+
+# Print the execution time
+print(time1)
+
+
+# --- Faster method ---
+
+# Remove punctuation using translate() and maketrans()
+def remove_punc2(text):
+    return text.translate(str.maketrans('', '', exclude))
+
+
+
+start = time.time()
+
+
+print(remove_punc2(text))
+time2 = time.time() - start
+print(time2)
+
+
+# Compare the execution time of both methods
+print(time1 / time2)
+
+#---------- compare with large data set ----------------- 
+large_text = text * 100000
+
+start = time.time()
+remove_punc(large_text)
+time1 = time.time() - start
+
+start = time.time()
+remove_punc2(large_text)
+time2 = time.time() - start
+
+print("Method 1:", time1)
+print("Method 2:", time2)
+print("Speed ratio:", time1 / time2)
+
+
+# -- 
+
+df2 = pd.read_csv("Text Preprocessing/labeled_data.csv")
+
+# print(df2)
+
+
+print(df2['tweet'].apply(remove_punc2))
